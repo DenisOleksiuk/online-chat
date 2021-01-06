@@ -1,18 +1,21 @@
+const express = require('express');
 const io = require("socket.io")(process.env.PORT || 3000, {
   cors: {
     origin: "*"
   }
 });
 
-const users = {}
+const app = express();
+
+app.use(express.static(__dirname + "/public"));
+
+app.listen(3001);
+
+const users = {};
 
 io.on('connection', socket => {
   socket.on('new-user', name => {
-    console.log(socket.id);
     users[socket.id] = name || 'user';
-    console.log(users[socket.id]);
-    console.log(users);
-    console.log();
     socket.broadcast.emit('user-connected', name)
     socket.broadcast.emit('user-disconnected', name)
   });
