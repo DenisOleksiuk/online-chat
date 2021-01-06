@@ -1,4 +1,4 @@
-const io = require("socket.io")(3000, {
+const io = require("socket.io")(process.env.PORT || 3000, {
   cors: {
     origin: "*"
   }
@@ -8,7 +8,6 @@ const users = {}
 
 io.on('connection', socket => {
   socket.on('new-user', name => {
-    // console.log(socket.id);
     console.log(socket.id);
     users[socket.id] = name || 'user';
     console.log(users[socket.id]);
@@ -21,4 +20,4 @@ io.on('connection', socket => {
     console.log(message);
     socket.broadcast.emit('chat-message', {name: users[socket.id], message})
   })
-})
+});
