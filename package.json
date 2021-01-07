@@ -8,6 +8,9 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
+  "engines": {
+    "node": "14.15.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DenisOleksiuk/online-chat.git"
